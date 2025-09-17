@@ -59,8 +59,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const loginMutation = useMutation({
     mutationFn: async (credentials: LoginData): Promise<User> => {
-      const response = await api.post("/api/login", credentials);
-      return response.data;
+      const response = await api.post("/api/auth/login", credentials);
+      localStorage.setItem('token', response.data.token);
+      return response.data.user;
     },
     onSuccess: (user: User) => {
       queryClient.setQueryData(["/api/user"], user);
