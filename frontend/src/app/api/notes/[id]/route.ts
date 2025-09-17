@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyToken, extractTokenFromRequest } from '../../../lib/auth';
+import { verifyToken, extractTokenFromRequest } from '@/lib/auth';
 import { 
   findNoteById, 
   updateNote, 
   deleteNote
-} from '../../../lib/database';
+} from '@/lib/database';
 
 async function authenticateUser(request: NextRequest) {
   const token = extractTokenFromRequest(request);
