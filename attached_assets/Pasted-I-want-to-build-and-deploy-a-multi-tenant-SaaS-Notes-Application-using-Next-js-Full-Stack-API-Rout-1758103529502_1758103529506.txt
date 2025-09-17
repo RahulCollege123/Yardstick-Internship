@@ -1,0 +1,86 @@
+I want to build and deploy a multi-tenant SaaS Notes Application using Next.js (Full Stack, API Routes + React frontend) and deploy it on Vercel. The app should allow multiple tenants (companies) to securely manage their users and notes, with role-based access and subscription limits. Please generate production-ready code, folder structure, and deployment steps.
+
+Requirements
+1. Multi-Tenancy
+
+Support at least two tenants: Acme and Globex.
+
+Strict data isolation: users and notes of one tenant should never be accessible to another.
+
+Use shared schema with a tenantId column in PostgreSQL/SQLite (document this in README).
+
+2. Authentication & Authorization
+
+JWT-based login.
+
+Roles:
+
+Admin → can invite users and upgrade subscriptions.
+
+Member → can only CRUD notes.
+
+Provide the following test accounts (all with password password):
+
+admin@acme.test → Admin, tenant: Acme
+
+user@acme.test → Member, tenant: Acme
+
+admin@globex.test → Admin, tenant: Globex
+
+user@globex.test → Member, tenant: Globex
+
+3. Subscription & Feature Gating
+
+Free Plan: Tenant limited to a maximum of 3 notes.
+
+Pro Plan: Unlimited notes.
+
+Upgrade endpoint: POST /api/tenants/:slug/upgrade (Admin only).
+
+After upgrade, tenant’s note limit must be lifted immediately.
+
+4. Notes API (CRUD with tenant isolation & role enforcement)
+
+POST /api/notes → Create a note
+
+GET /api/notes → List all tenant’s notes
+
+GET /api/notes/:id → Retrieve a note
+
+PUT /api/notes/:id → Update a note
+
+DELETE /api/notes/:id → Delete a note
+
+5. Deployment
+
+Backend & frontend both hosted on Vercel.
+
+Enable CORS for automated tests.
+
+Health endpoint: GET /api/health → { "status": "ok" }.
+
+6. Frontend (minimal but functional)
+
+Login form (with JWT).
+
+Show tenant’s notes in a list.
+
+Allow creating & deleting notes.
+
+Show “Upgrade to Pro” button when Free tenant reaches note limit (only visible to Admin).
+
+Deliverables
+
+Full Next.js project (with /api routes for backend, /pages or /app directory for frontend).
+
+Database schema setup (SQLite or Postgres, Prisma recommended).
+
+README.md explaining:
+
+Multi-tenancy approach.
+
+Test accounts.
+
+How to deploy to Vercel.
+
+Ready-to-deploy app on Vercel.
